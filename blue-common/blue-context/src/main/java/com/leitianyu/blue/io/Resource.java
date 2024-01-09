@@ -10,7 +10,9 @@ import java.util.Objects;
  */
 public class Resource {
 
+    //文件绝对路径xxx/xxx.xxx
     private final String path;
+    //basePackage/xxx/name.xxx
     private final String name;
     public Resource(String path, String name) {
         this.path = path;
