@@ -123,6 +123,11 @@
                 <artifactId>blue-context</artifactId>
                 <version>${blue.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.leitianyu</groupId>
+                <artifactId>blue-aop</artifactId>
+                <version>${blue.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
