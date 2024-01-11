@@ -19,6 +19,8 @@
         <module>blue-context</module>
         <module>blue-aop</module>
         <module>blue-jdbc</module>
+        <module>blue-web</module>
+        <module>blue-boot</module>
     </modules>
 
 

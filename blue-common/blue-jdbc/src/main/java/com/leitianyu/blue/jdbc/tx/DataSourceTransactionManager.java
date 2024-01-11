@@ -33,7 +33,7 @@ public class DataSourceTransactionManager implements PlatformTransactionManager,
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         TransactionStatus ts = transactionStatus.get();
         if (ts == null) {
-            // new TransactionStatus
+            // 新建连接
             try (Connection connection = dataSource.getConnection()) {
                 final boolean autoCommit = connection.getAutoCommit();
                 // check 事务

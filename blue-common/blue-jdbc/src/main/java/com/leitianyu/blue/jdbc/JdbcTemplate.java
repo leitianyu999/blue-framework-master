@@ -24,6 +24,12 @@ public class JdbcTemplate {
         return queryForObject(sql, NumberRowMapper.instance, args);
     }
 
+    /**
+     * 对clazz简单分类
+     *
+     * @author leitianyu
+     * @date 2024/1/11 16:07
+     */
     @SuppressWarnings("unchecked")
     public <T> T queryForObject(String sql, Class<T> clazz, Object... args) throws DataAccessException {
         if (clazz == String.class) {
@@ -41,6 +47,7 @@ public class JdbcTemplate {
     public <T> T queryForObject(String sql, RowMapper<T> rowMapper, Object... args) throws DataAccessException {
         return execute(preparedStatementCreator(sql, args),
                 // PreparedStatementCallback
+                // 对返回数据处理
                 (PreparedStatement ps) -> {
                     T t = null;
                     try (ResultSet rs = ps.executeQuery()) {
@@ -146,6 +153,7 @@ public class JdbcTemplate {
     }
 
     private PreparedStatementCreator preparedStatementCreator(String sql, Object... args) {
+        // sql注入
         return (Connection con) -> {
             PreparedStatement ps = con.prepareStatement(sql);
             bindArgs(ps, args);
@@ -153,6 +161,12 @@ public class JdbcTemplate {
         };
     }
 
+    /**
+     * 将数据填入（？替代）
+     *
+     * @author leitianyu
+     * @date 2024/1/11 18:58
+     */
     private void bindArgs(PreparedStatement ps, Object... args) throws SQLException {
         for (int i = 0; i < args.length; i++) {
             ps.setObject(i + 1, args[i]);

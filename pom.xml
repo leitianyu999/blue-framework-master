@@ -128,6 +128,16 @@
                 <artifactId>blue-aop</artifactId>
                 <version>${blue.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.leitianyu</groupId>
+                <artifactId>blue-jdbc</artifactId>
+                <version>${blue.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.leitianyu</groupId>
+                <artifactId>blue-web</artifactId>
+                <version>${blue.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -137,6 +147,20 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <compilerArgs>
+                        <arg>-Xlint:deprecation</arg>
+                    </compilerArgs>
+                    <compilerArguments>
+                        <bootclasspath>${java.home}\lib\rt.jar;${java.home}\lib\jce.jar</bootclasspath>
+                    </compilerArguments>
+                </configuration>
             </plugin>
         </plugins>
     </build>

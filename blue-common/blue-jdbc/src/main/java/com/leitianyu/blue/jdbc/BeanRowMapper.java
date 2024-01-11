@@ -28,19 +28,28 @@ public class BeanRowMapper<T> implements RowMapper<T> {
     Map<String, Method> methods = new HashMap<>();
 
 
+    /**
+     * 初始化变量和set方法
+     *
+     * @author leitianyu
+     * @date 2024/1/11 18:55
+     */
     public BeanRowMapper(Class<T> clazz) {
 
         this.clazz = clazz;
         try {
+            // 获取构造器
             this.constructor = clazz.getConstructor();
         } catch (ReflectiveOperationException e) {
             throw new DataAccessException(String.format("No public default constructor found for class %s when build BeanRowMapper.", clazz.getName()), e);
         }
+        // 存入public修饰的变量
         for (Field f : clazz.getFields()) {
             String name = f.getName();
             this.fields.put(name, f);
             logger.atDebug().log("Add row mapping: {} to field {}", name, name);
         }
+        // 存入set方法
         for (Method m : clazz.getMethods()) {
             Parameter[] ps = m.getParameters();
             if (ps.length == 1) {
@@ -54,6 +63,12 @@ public class BeanRowMapper<T> implements RowMapper<T> {
         }
     }
 
+    /**
+     * 返回值填入
+     *
+     * @author leitianyu
+     * @date 2024/1/11 18:54
+     */
     @Override
     public T mapRow(ResultSet rs, int rowNum) throws SQLException {
         T bean;
@@ -61,6 +76,7 @@ public class BeanRowMapper<T> implements RowMapper<T> {
             bean = this.constructor.newInstance();
             ResultSetMetaData meta = rs.getMetaData();
             int columns = meta.getColumnCount();
+            // 遍历填入变量
             for (int i = 1; i <= columns; i++) {
                 String label = meta.getColumnLabel(i);
                 Method method = this.methods.get(label);

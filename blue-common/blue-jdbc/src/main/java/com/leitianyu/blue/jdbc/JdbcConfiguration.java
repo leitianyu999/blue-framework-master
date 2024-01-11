@@ -19,16 +19,17 @@ import javax.sql.DataSource;
 @Configuration
 public class JdbcConfiguration {
 
+    // 连接池建立
     @Bean(destroyMethod = "close")
     DataSource dataSource(
             // properties:
-            @Value("${summer.datasource.url}") String url, //
-            @Value("${summer.datasource.username}") String username, //
-            @Value("${summer.datasource.password}") String password, //
-            @Value("${summer.datasource.driver-class-name:}") String driver, //
-            @Value("${summer.datasource.maximum-pool-size:20}") int maximumPoolSize, //
-            @Value("${summer.datasource.minimum-pool-size:1}") int minimumPoolSize, //
-            @Value("${summer.datasource.connection-timeout:30000}") int connTimeout //
+            @Value("${blue.datasource.url}") String url, //
+            @Value("${blue.datasource.username}") String username, //
+            @Value("${blue.datasource.password}") String password, //
+            @Value("${blue.datasource.driver-class-name:}") String driver, //
+            @Value("${blue.datasource.maximum-pool-size:20}") int maximumPoolSize, //
+            @Value("${blue.datasource.minimum-pool-size:1}") int minimumPoolSize, //
+            @Value("${blue.datasource.connection-timeout:30000}") int connTimeout //
     ) {
         HikariConfig config = new HikariConfig();
         config.setAutoCommit(false);

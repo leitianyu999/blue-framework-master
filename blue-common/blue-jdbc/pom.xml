@@ -8,6 +8,7 @@
         <artifactId>blue-common</artifactId>
         <version>0.1</version>
     </parent>
+    <packaging>jar</packaging>
 
     <artifactId>blue-jdbc</artifactId>
 
